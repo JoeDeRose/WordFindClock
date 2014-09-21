@@ -1,0 +1,112 @@
+@charset "utf-8";
+/* CSS Document */
+
+html {
+	height: 100%;
+}
+
+.DivTable {
+	display: table;
+}
+
+.DivTableRow {
+	display: table-row;
+}
+
+.DivTableCell {
+	display: table-cell;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#pageCenter {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+}
+
+#pageCenter #DivTable {
+	position: relative;
+	left: -50%;
+}
+
+.invisibleBorder {
+	/*
+		This is applied to a full (non-contiguous) column and (non-contiguous) row of cells that are
+		NOT used in any words to prevent resizing of grid when borders are added around found words.
+	*/
+	border-style: solid;
+	border-color: white;
+}
+
+.grayLetter {
+	color: lightgray;
+}
+
+.wordCircle {
+	border-radius: 50%;
+	border-style: solid;
+	border-color: red;
+	border-width: 5px;
+}
+.wordTop {
+	border-top-left-radius: 50%;
+	border-top-right-radius: 50%;
+	border-left-style: solid;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-left-color: red;
+	border-top-color: red;
+	border-right-color: red;
+	border-width: 5px;
+}
+.wordBottom {
+	border-bottom-left-radius: 50%;
+	border-bottom-right-radius: 50%;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-left-color: red;
+	border-bottom-color: red;
+	border-right-color: red;
+	border-width: 5px;
+}
+.wordLeft {
+	border-top-left-radius: 50%;
+	border-bottom-left-radius: 50%;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-style: solid;
+	border-bottom-color: red;
+	border-left-color: red;
+	border-top-color: red;
+	border-width: 5px;
+}
+.wordRight {
+	border-top-right-radius: 50%;
+	border-bottom-right-radius: 50%;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-top-style: solid;
+	border-bottom-color: red;
+	border-right-color: red;
+	border-top-color: red;
+	border-width: 5px;
+}
+.wordVertical {
+	border-left-style: solid;
+	border-right-style: solid;
+	border-left-color: red;
+	border-right-color: red;
+	border-width: 5px;
+}
+.wordHorizontal {
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: red;
+	border-bottom-color: red;
+	border-width: 5px;
+}
+

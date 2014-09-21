@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--
+The clock updates at the five-minute mark. Characters (except those in found words) turn gray to mark the passage of time
+within that five-minute block.
+
+To see the display for a specific time, add a "time" paramter in the query string. For example, to see the time for 8:25 go to:
+http://joederose.us/about/examples/WordFindClock/WordFindClock.htm?time=8:25
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Word-Find Clock</title>
+
+<link rel="stylesheet" type="text/css" media="all" href="WordFindClock.css" />
+
+<script src="jquery-min.js"></script>
+
+</head>
+
+<body onLoad="StartClock();" onResize="StartClock();">
+
+<div id="pageCenter" >
+    <div id="DivTable">
+    Test
+    </div>
+</div>
+
+<script src="WordFindClock.js"></script>
+
+</body>
+</html>
