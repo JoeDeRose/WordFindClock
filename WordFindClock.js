@@ -11,7 +11,7 @@ var WordClock = {
 		["T","L","O","V","E","U","R","U","G","E","V","L"],
 		["U","E","A","R","L","R","A","T","H","Y","E","O"],
 		["R","I","S","E","V","E","N","O","T","E","N","C"],
-		["E","R","I","V","E","T","E","R","N","I","C","K"]
+		["E","R","I","V","E","T","E","R","T","I","C","K"]
 	],
 	"classes" : {
 		/*
@@ -101,38 +101,48 @@ function StartClock() {
 	$( ".invisibleBorder" ).css( "border-width", lineSize + "px" );
 	
 	thisURL = window.location.toString();
-	var definedTime = false;
-	var definedTimeMinutes;
-	var definedTimeHours;
+	var displayType = "RunningClock";
+	var fixedTimeMinutes;
+	var fixedTimeHours;
 	if ( thisURL.indexOf( "?" ) > -1 ) {
 		thisQueryString = thisURL.split( "?" );
 		theseArguments = thisQueryString[1].split( "&" );
 		for ( var i = 0; i < theseArguments.length; i++ ) {
 			if ( theseArguments[i].slice( 0, 5 ).toUpperCase() == "TIME=" ) {
 				thisTimeString = theseArguments[i].slice( 5 ).replace( /:|\.|,|-/g, "" );
-				definedTimeMinutes = parseInt( thisTimeString.slice( -2 ) );
-				definedTimeHours = parseInt( thisTimeString.slice( 0, -2 ) );
-				if ( definedTimeHours <= 24 && definedTimeMinutes <= 59 ) {
-					definedTimeHours = definedTimeHours % 12;
-					definedTimeMinutes = PreviousFiveMinuteMark( definedTimeMinutes );
-					definedTime = true;
+				fixedTimeMinutes = parseInt( thisTimeString.slice( -2 ) );
+				fixedTimeHours = parseInt( thisTimeString.slice( 0, -2 ) );
+				if ( fixedTimeHours <= 24 && fixedTimeMinutes <= 59 ) {
+					fixedTimeHours = fixedTimeHours % 12;
+					fixedTimeMinutes = PreviousFiveMinuteMark( fixedTimeMinutes );
+					displayType = "FixedTime";
 				}
+			} else if ( theseArguments[i].toUpperCase() == "ALLWORDS" || theseArguments[i].slice( 0, 9 ).toUpperCase() == "ALLWORDS=" ) {
+				displayType = "ShowWords";
 			}
 		}
 	}
 	
-	if ( definedTime == true ) {
-		DisplayResults( definedTimeHours, definedTimeMinutes );
-	} else {
-		if ( typeof clockInterval !== "undefined" ) {
-			clearInterval( clockInterval );
-		}
-		clockInterval = setInterval(
-			function() {
-				UpdateDisplay();
-			},
-			250
-		);
+	switch ( displayType ) {
+		case "FixedTime":
+			DisplayResults( fixedTimeHours, fixedTimeMinutes );
+			break;
+		case "ShowWords":
+			for ( var thisClass in WordClock["classes"] ) {
+				$( "." + thisClass ).css( "background-color", "yellow" );
+			}
+			break;
+		case "RunningClock":
+			if ( typeof clockInterval !== "undefined" ) {
+				clearInterval( clockInterval );
+			}
+			clockInterval = setInterval(
+				function() {
+					UpdateDisplay();
+				},
+				250
+			);
+			break;
 	}
 
 }
