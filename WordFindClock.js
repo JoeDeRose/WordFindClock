@@ -102,6 +102,7 @@ function StartClock() {
 	
 	thisURL = window.location.toString();
 	var displayType = "RunningClock";
+	var showGrayLetters = true;
 	var fixedTimeMinutes;
 	var fixedTimeHours;
 	if ( thisURL.indexOf( "?" ) > -1 ) {
@@ -119,6 +120,8 @@ function StartClock() {
 				}
 			} else if ( theseArguments[i].toUpperCase() == "ALLWORDS" || theseArguments[i].slice( 0, 9 ).toUpperCase() == "ALLWORDS=" ) {
 				displayType = "ShowWords";
+			} else if ( theseArguments[i].toUpperCase() == "NOGRAY" || theseArguments[i].slice( 0, 7 ).toUpperCase() == "NOGRAY=" ) {
+				showGrayLetters = false;
 			}
 		}
 	}
@@ -138,7 +141,7 @@ function StartClock() {
 			}
 			clockInterval = setInterval(
 				function() {
-					UpdateDisplay();
+					UpdateDisplay( showGrayLetters );
 				},
 				250
 			);
@@ -147,7 +150,7 @@ function StartClock() {
 
 }
 
-function UpdateDisplay() {
+function UpdateDisplay( showGrayLetters ) {
 	
 	nowTime = new Date();
 	var nowHours = nowTime.getHours() % 12;
@@ -161,8 +164,10 @@ function UpdateDisplay() {
 	var grayLetterCount = Math.floor( ( elapsedMilliseconds / 300000 ) * ( cellsInGrid + 1 ) );
 	//                                                        300000 = milliseconds in 5 minutes
 	
-	$( ".DivTableCell" ).removeClass( "grayLetter" );
-	$( ".DivTableCell" ).slice( 0, grayLetterCount ).addClass( "grayLetter" );
+	if ( showGrayLetters == true ) {
+		$( ".DivTableCell" ).removeClass( "grayLetter" );
+		$( ".DivTableCell" ).slice( 0, grayLetterCount ).addClass( "grayLetter" );
+	}
 	
 	$( ".DivTableCell" ).removeClass( "wordCircle" );
 	$( ".DivTableCell" ).removeClass( "wordTop" );
